@@ -39,20 +39,33 @@ const App = () => {
             setNewName("")
             setNewNumber("")
           })
-          .catch(() => {
-            showNotification("Information of " + newName + " has already been removed from server", "error")
-            setPersons(persons.filter((person) => person.id !== existingPerson.id))
+          .catch((error) => {
+            if (error.response && error.response.data && error.response.data.error) {
+              showNotification(error.response.data.error, "error")
+            } else {
+              showNotification("Information of " + newName + " has already been removed from server", "error")
+              setPersons(persons.filter((person) => person.id !== existingPerson.id))
+            }
           })
       }
       return
     }
     const personObject = { name: newName, number: newNumber }
-    personService.create(personObject).then((returnedPerson) => {
-      setPersons(persons.concat(returnedPerson))
-      showNotification("Added " + newName, "success")
-      setNewName("")
-      setNewNumber("")
-    })
+    personService
+      .create(personObject)
+      .then((returnedPerson) => {
+        setPersons(persons.concat(returnedPerson))
+        showNotification("Added " + newName, "success")
+        setNewName("")
+        setNewNumber("")
+      })
+      .catch((error) => {
+        if (error.response && error.response.data && error.response.data.error) {
+          showNotification(error.response.data.error, "error")
+        } else {
+          showNotification("Failed to add " + newName, "error")
+        }
+      })
   }
 
   const handleDelete = (person) => {
