@@ -11,3 +11,7 @@ My solutions for the University of Helsinki Full Stack Open course.
 
 - part3/phonebook - exercises 3.1-3.22: phonebook backend (Node.js + Express + Mongoose + MongoDB Atlas), morgan logging, validation (name min. 3 chars, phone number min. 8 chars and NN-NNNNNN / NNN-NNNNNNNN format), ESLint, frontend production build served by the backend. Run with `npm start` (port 3001, needs MONGODB_URI in .env, never committed).
 - Deployed application: https://full-stack-open-vnld.onrender.com
+
+## Part 4
+
+- part4/bloglist - exercises 4.1-4.23: blog list backend (Node.js + Express + Mongoose + MongoDB) with Vitest/Supertest tests, user administration and token authentication. Run `npm test` in part4/bloglist (needs a test MongoDB, see part4/bloglist/README.md).
